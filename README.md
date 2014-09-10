@@ -2,6 +2,7 @@ recipes
 =======
 
 Cooking app
+
 Ethan Senator and Ana Bealo
 
   1. Parse cookbook from inter webs

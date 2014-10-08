@@ -1,6 +1,7 @@
+
 <?php
 
-	$host = "esenator.rochestercs.org";
+	$host = "localhost";
 	$username = "esenator"; //mysql username
 	$password = "CSC210!ea"; //mysql password
 	$db_name = "esenator_db"; //name of db

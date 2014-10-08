@@ -56,8 +56,17 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+        <h1>Signup</h1>
+        <form class="form-signin" role="form" action="new_login.php" method="post">
+            <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+            <input type="email" name="email" class="form-control" placeholder="Email address" required>
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
+            <label class="checkbox">
+            <input type="checkbox" value="remember-me"> Remember me
+            </label>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+
       </div>
 
     </div><!-- /.container -->

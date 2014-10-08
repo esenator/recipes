@@ -1,13 +1,5 @@
-
 <?php
-
-	$host = "localhost";
-	$username = "esenator"; //mysql username
-	$password = "CSC210!ea"; //mysql password
-	$db_name = "esenator_db"; //name of db
-	$user_table = "profiles"; //name of table of users
-
-	public static function register_user($username, $password, $email) {
+    function register_user($username, $password, $email) {
         // validate information
         // if (!is_string($first_name) || strlen($name) < 1)
         //     throw new Exception('Invalid name (must be at least 1 character long)');
@@ -20,7 +12,11 @@
 
         // insert member into db
         include 'db.php';
-        $stmt = $db->prepare('INSERT INTO members(username, password, email) VALUES(:username, :password, :email)');
+        include 'password.php';
+        
+        $password = password_hash($password, PASSWORD_BCRYPT);
+        
+        $stmt = $db->prepare('INSERT INTO profiles(username, password, email) VALUES(:username, :password, :email)');
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':email', $email);
@@ -31,16 +27,16 @@
             throw new Exception('Member already exists.');
 
         // instantiate member object
-        $stmt = $db->prepare('SELECT username, password, email FROM members WHERE username=:username AND password=:password AND email=:email');
+        $stmt = $db->prepare('SELECT username, password, email FROM profiles WHERE username=:username AND password=:password AND email=:email');
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $pasword);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
-        $member = $stmt->fetchObject('Member');
-        if ($member === FALSE)
-            throw new Exception('Could not find member after insertion.');
+//        $member = $stmt->fetchObject('Member');
+//        if ($member === FALSE)
+//            throw new Exception('Could not find member after insertion.');
 
-        return $member;
+//        return $member;
     }
 
 	//connect to server
@@ -63,7 +59,7 @@
 	// } else {
 	// 	echo "wrong username or password"; 
 	// }
-
+    header( 'Location: profile.html' ) ;
 ?>
 
 

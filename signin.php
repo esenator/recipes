@@ -1,4 +1,8 @@
-
+<?php     
+    if (!defined('SID')) {
+    session_start();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,7 +35,14 @@
   <body>
 
     <div class="container">
-
+        <?php if (!empty($_SESSION["login_failure"])) { ?>
+        <div class="alert alert-danger" role="alert">
+            <?php
+                echo $_SESSION["login_failure"];
+                unset($_SESSION["login_failure"]);
+            ?>
+        </div>
+        <?php } ?>
       <form class="form-signin" role="form" action="new_login.php" method="post">
         <h2 class="form-signin-heading">Sign in</h2>
         <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>

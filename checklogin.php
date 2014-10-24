@@ -1,8 +1,8 @@
 <?php
 
 $host = //host name
-$username = ""; //mysql username
-$password = ""; //mysql password
+$username = "esenator"; //mysql username
+$password = "CSC210!ea"; //mysql password
 $db_name = "esenator_db"; //name of db
 $user_table = "profiles"; //name of table of users
 

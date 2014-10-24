@@ -11,6 +11,7 @@
 
     functon login_user($username, $password) {
         include 'password.php';
+        include 'db.php';
         
         $password = password_hash($password, PASSWORD_BCRYPT);
         $sql="SELECT * FROM $user_table WHERE username='$username' and password='$password'";

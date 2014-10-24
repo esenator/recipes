@@ -54,7 +54,6 @@
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><button type="button" class="btn btn-default navbar-btn" id="sign-in">Sign in</button></li>
                         <li class="dropdown">
                             <a href="#profile" class="dropdown-toggle" data-toggle="dropdown">Profile<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
@@ -79,7 +78,7 @@
             ?>
         </div>
         <?php } ?>
-      <form class="form-signin" role="form" action="new_login.php" method="post">
+      <form class="form-signin" role="form" action="PHP_folder/new_login.php" method="post">
         <h2 class="form-signin-heading">Sign up</h2>
         <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
         <input type="email" name="email" class="form-control" placeholder="Email address" required>

@@ -1,8 +1,10 @@
-<?php     
-    if (!defined('SID')) {
+<?php 
+    if(!defined('SID')) {
         session_start();
     }
+    $_SESSION['signed_in'] = 'false';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     
@@ -19,14 +21,12 @@
         <title>Recipes</title>
         
         <!-- Custom styles for this template -->
-        <link href="css/stylesheet.css" rel="stylesheet">
-        <link href="css/yeti.css" rel="stylesheet">
+        <link href="../css/stylesheet.css" rel="stylesheet">
+        <link href="../css/yeti.css" rel="stylesheet">
         
     </head>
-
-  <body>
-
-      <body>
+    
+    <body>
         <nav class="navbar navbar-default" role="navigation" id="myTab">
 
             <div class="container-fluid">
@@ -61,36 +61,45 @@
                                 <li><a href="#prof_view">Go to Profile</a></li>
                                 <li><a href="#prof_edit">Edit Profile</a></li>
                                 <li class="divider"></li>
-                                <li><a href="signin">Sign in</a></li>
-                                <li><a href="#logout">Logout</a></li>
+                                <li><a href="../signup.php">Sign up</a></li>
+                                <?php if ($_SESSION['signed_in'] == 'false') { 
+        echo "not signed in"; ?>
+                                    <li><a href="../signin.php">Sign in</a></li>
+                                <?php } else { echo "signed in" ; ?>
+                                    <li  class="disabled"><a href="../signup.php">Sign up</a></li> 
+                                <?php } ?>
+                                <?php if ($_SESSION['signed_in'] == 'false') { ?>
+                                    <li  class="disabled"><a href="#logout">Logout</a></li>
+                                <?php } else { ?>
+                                    <li><a href="#logout">Logout</a></li>
+                                <?php } ?>
                             </ul>
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-      
-      
-    <div class="container">
-        <?php if (!empty($_SESSION["login_failure"])) { ?>
-        <div class="alert alert-danger" role="alert">
-            <?php
-                echo $_SESSION["login_failure"];
-                unset($_SESSION["login_failure"]);
-            ?>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="home"></div>
+            <div class="tab-pane" id="contact"></div>
+            <div class="tab-pane" id="about"></div>
+            <div class="tab-pane" id="prof_view"></div>
         </div>
-        <?php } ?>
-      <form class="form-signin" role="form" action="checklogin.php" method="post">
-        <h2 class="form-signin-heading">Sign in</h2>
-        <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
-        <input type="password" name="password" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
 
-    </div> <!-- /container -->
+        <!-- Bootstrap core JavaScript-->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
+        <script>
+            $('#home').load('../tab_pages/main.html');
+            $('#about').load('../tab_pages/about.html');
+            $('#contact').load('../tab_pages/contact.html');
+            
+            $('#signin').load('../signin.php');
+        </script>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
+    </body>
+
 </html>

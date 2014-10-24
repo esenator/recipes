@@ -19,8 +19,11 @@
         $count=mysql_num_rows($result);
         if($count == 1) {
              $_SESSION['memID'] = $username
+             $('#signin').attr("disabled", true);
+             $_SESSION['signed_in'] = 'false';
+             event.preventDefault();     
         } else {
             echo "wrong username or password"; 
         }
-
+        
     }

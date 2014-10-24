@@ -26,8 +26,7 @@
 
   <body>
 
-      <body>
-        <nav class="navbar navbar-default" role="navigation" id="myTab">
+      <nav class="navbar navbar-default" role="navigation" id="myTab">
 
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -62,7 +61,6 @@
                                 <li><a href="#prof_view">Go to Profile</a></li>
                                 <li><a href="#prof_edit">Edit Profile</a></li>
                                 <li class="divider"></li>
-                                <li><a href="signin">Sign in</a></li>
                                 <li><a href="#logout">Logout</a></li>
                             </ul>
                         </li>
@@ -81,11 +79,12 @@
             ?>
         </div>
         <?php } ?>
-      <form class="form-signin" role="form" action="checklogin.php" method="post">
-        <h2 class="form-signin-heading">Sign in</h2>
+      <form class="form-signin" role="form" action="new_login.php" method="post">
+        <h2 class="form-signin-heading">Sign up</h2>
         <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+        <input type="email" name="email" class="form-control" placeholder="Email address" required>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Create Profile</button>
       </form>
 
     </div> <!-- /container -->

@@ -36,6 +36,7 @@
         $stmt->execute();
         
         $_SESSION('memid') = $username;
+        $_SESSION['signed_in'] = 'false';
         header( 'Location: index.html' ) ;
         return;
     }

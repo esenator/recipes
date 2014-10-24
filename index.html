@@ -1,3 +1,10 @@
+<?php 
+    if(!defined('SID')) {
+        session_start();
+    }
+    $_SESSION['signed_in'] = 'false';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     
@@ -55,7 +62,17 @@
                                 <li><a href="#prof_view">Go to Profile</a></li>
                                 <li><a href="#prof_edit">Edit Profile</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#logout">Logout</a></li>
+                                <li><a href="#signin">Sign in</a></li>
+                                <?php if ($_SESSION['signed_in'] == 'false') { ?>
+                                    <li><a href="#signin">Sign in</a></li>
+                                <?php } else { ?>
+                                    <li  class="disabled"><a href="#signin">Sign in</a></li>
+                                <?php } ?>
+                                <?php if ($_SESSION['signed_in'] == 'false') { ?>
+                                    <li  class="disabled"><a href="#logout">Logout</a></li>
+                                <?php } else { ?>
+                                    <li><a href="#logout">Logout</a></li>
+                                <?php } ?>
                             </ul>
                         </li>
                     </ul>
@@ -79,6 +96,8 @@
             $('#home').load('tab_pages/main.html');
             $('#about').load('tab_pages/about.html');
             $('#contact').load('tab_pages/contact.html');
+            
+            $('#signin').load('signin.php');
         </script>
 
     </body>

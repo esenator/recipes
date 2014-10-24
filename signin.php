@@ -79,19 +79,43 @@
             ?>
         </div>
         <?php } ?>
-      <form class="form-signin" role="form" action="new_login.php" method="post">
+      <form class="form-signin" role="form">
         <h2 class="form-signin-heading">Sign in</h2>
-        <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
-        <input type="email" name="email" class="form-control" placeholder="Email address" required>
-        <input type="password" name="password" class="form-control" placeholder="Password" required>
+        <input id="username" type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+        <input id="email" type="email" name="email" class="form-control" placeholder="Email address" required>
+        <input id="password" type="password" name="password" class="form-control" placeholder="Password" required>
         <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
+        <input type="checkbox" value="remember-me"> Remember me
         </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button id="submit_signin" class="btn btn-lg btn-primary btn-block">Sign in</button>
       </form>
 
     </div> <!-- /container -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        
+    <script>
+        $( document ).ready(function() {
+            $("#submit_signin").on("click", function(e){
+                e.preventDefault;
+                var ajaxURL = 'PHP_folder/new_login.php';
 
+                $.ajax({
+                    type: 'POST',
+                    async: false,
+                    url: ajaxURL,
+                    data: { 
+                        username: $('.form-signin #username').val(),
+                        password: $('.form-signin #email').val(),
+                        email: $('.form-signin #password').val()
+                    },     
+                    success: function(data){
+                        alert(data);
+                    }
+                });
+                alert("ajax closed");
+            }); 
+        });
+    </script>
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>

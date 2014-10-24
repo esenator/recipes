@@ -1,10 +1,27 @@
 <?php
+    echo "top of new login";
     if (!defined('SID')) {
-    session_start();
+        session_start();
     }
     error_reporting(E_ALL);
     ini_set("display_errors", 1);
-    function register_user($username, $password, $email) {
+
+    try {
+        # MySQL with PDO_MYSQL
+        $db = new PDO("mysql:host=localhost;dbname=esenator_db", 'esenator', 'CSC210!ea');
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db->setAttribute(PDO::ATTR_PERSISTENT, true);
+    }
+    catch (PDOException $e) { // remove try/catch to show real exception (not in prod)
+        throw new Exception('Could not connect to database.');
+    }
+
+    $newusername = $_REQUEST['username'];
+	$newpassword = $_REQUEST['password'];
+	$newemail = $_REQUEST['email'];
+	register_user($newusername, $newpassword, $newemail, $db);
+
+    function register_user($username, $password, $email, $db) {
         include 'password.php';
         
         $password = password_hash($password, PASSWORD_BCRYPT);
@@ -34,12 +51,9 @@
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         header( 'Location: index.html' ) ;
+        echo "success";
         return;
     }
-	$newusername = $_POST['username'];
-	$newpassword = $_POST['password'];
-	$newemail = $_POST['email'];
-	register_user($newusername, $newpassword, $newemail);
 ?>
 
 

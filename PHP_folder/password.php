@@ -1,4 +1,8 @@
 <?php
+
+if (!defined('SID')) {
+        session_start();
+    }
 /**
  * A Compatibility library with PHP 5.5's simplified password hashing API.
  *

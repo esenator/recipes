@@ -1,4 +1,7 @@
 <?php
+if (!defined('SID')) {
+        session_start();
+    }
 try {
      	# MySQL with PDO_MYSQL
         $db = new PDO("mysql:host=localhost;dbname=esenator_db", 'esenator', 'CSC210!ea');

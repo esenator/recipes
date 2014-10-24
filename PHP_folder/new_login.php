@@ -1,7 +1,8 @@
 <?php
     if (!defined('SID')) {
-    session_start();
+        session_start();
     }
+
     error_reporting(E_ALL);
     ini_set("display_errors", 1);
     function register_user($username, $password, $email) {
@@ -33,6 +34,8 @@
         $stmt->bindParam(':password', $pasword);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
+        
+        $_SESSION('memid') = $username;
         header( 'Location: index.html' ) ;
         return;
     }
@@ -40,6 +43,7 @@
 	$newpassword = $_POST['password'];
 	$newemail = $_POST['email'];
 	register_user($newusername, $newpassword, $newemail);
+    
 ?>
 
 

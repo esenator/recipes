@@ -1,2 +1,4 @@
 .DS_Store
 /web2.0/venv/
+/web2.0/__pycache__
+

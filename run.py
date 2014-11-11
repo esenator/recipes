@@ -1,4 +1,4 @@
 #!venv/bin/python
 
-from app import app
+from Recipes import app
 app.run(debug = True)

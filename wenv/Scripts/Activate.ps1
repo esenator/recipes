@@ -27,7 +27,7 @@ function global:deactivate ([switch]$NonDestructive) {
 
 deactivate -nondestructive
 
-$env:VIRTUAL_ENV="C:\Users\Ryan\documents\visual studio 2013\Projects\FlaskWebProject1\FlaskWebProject1\wenv"
+$env:VIRTUAL_ENV="c:\users\ryan\documents\visual studio 2013\Projects\Recipes\Recipes\wenv"
 
 # Set the prompt to include the env name
 # Make sure _OLD_VIRTUAL_PROMPT is global

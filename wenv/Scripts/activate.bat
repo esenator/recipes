@@ -1,5 +1,5 @@
 @echo off
-set "VIRTUAL_ENV=C:\Users\Ryan\documents\visual studio 2013\Projects\FlaskWebProject1\FlaskWebProject1\wenv"
+set "VIRTUAL_ENV=c:\users\ryan\documents\visual studio 2013\Projects\Recipes\Recipes\wenv"
 
 if not defined PROMPT (
     set "PROMPT=$P$G"

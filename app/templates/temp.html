@@ -1,23 +1,5 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1> Hello, world 2 </h1>
-
-<hr>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-        {% for message in messages %}
-            <li>{{ message }} </li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-
-<hr>
-    <div>
-        <a href="{{ url_for('index') }}">Home</a>
-        
-    </div>
-
+<h1> Hello, world DOS</h1>
 {% endblock %}

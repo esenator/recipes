@@ -11,6 +11,7 @@ from .models import User
 
 @app.route('/')
 @app.route('/index')
+@login_required
 def index(): 
     user = g.user
     return render_template('index.html', user=user, title='Home')
@@ -62,8 +63,8 @@ def register():
     if request.method == 'POST' and form.validate():
         user = User.query.filter_by(username = form.username.data).first()
         if user is None:
-            user = User(form.username.data, form.email.data,
-                    form.password.data, form.firstname.data, form.lastname.data)
+            user = User(username=form.username.data, email=form.email.data,
+                    password=form.password.data, firstname=form.firstname.data, lastname=form.lastname.data)
             db.session.add(user)
             db.session.commit()
             remember_me = False

@@ -91,3 +91,7 @@ def user(username):
         return redirect(url_for('index'))
     return render_template('user.html', user=user)
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+

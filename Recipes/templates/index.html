@@ -7,15 +7,33 @@
 <h1> Please sign in </h1>
 {% endif %}
 
-<!-- <hr>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-        {% for message in messages %}
-            <li>{{ message }} </li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %} -->
+<div id="recipes"> 
+
+</div>
+
+<button type="button" id="next"> Next Recipe </button> 
+
+<script>
+var n = 0; 
+
+function loadRecipe(n){
+	$.ajax({
+		url: '/recipes/' + n, 
+		success: function(data){
+			$("#recipes").append("<h2> " + data["name"] + " </h2> 
+								<p> " + data["steps"] +  "</p> 
+								<hr> ");
+		}
+	}
+}
+
+$(#next).click(function() {
+	loadRecipe(n); 
+	n = n+1; 
+})
+</script>
+
+
 
 {% endblock %}
+

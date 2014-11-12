@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1> Hello, world </h1>
+{% if user %}
+<h1> Hello {{ user.username }} </h1>
+{% else %}
+<h1> Please sign in </h1>
+{% endif %}
 
-<hr>
+<!-- <hr>
     {% with messages = get_flashed_messages() %}
       {% if messages %}
         <ul>
@@ -12,6 +16,6 @@
         {% endfor %}
         </ul>
       {% endif %}
-    {% endwith %}
+    {% endwith %} -->
 
 {% endblock %}

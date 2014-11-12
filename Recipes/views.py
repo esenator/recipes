@@ -6,6 +6,7 @@ from flask.ext.login import login_user, logout_user, current_user, login_require
 from Recipes import app, db, lm
 from .forms import LoginForm, RegisterForm
 from .models import User
+from werkzeug.security import generate_password_hash, check_password_hash
 
 @app.route('/')
 @app.route('/index')
@@ -24,18 +25,16 @@ def load_user(id):
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-   
-
     if g.user is not None and g.user.is_authenticated():
         return redirect(url_for('index'))
     form = LoginForm()
-    
     #Query database
     if form.validate_on_submit():
-        print(form.username.data)
         session['remember_me'] = form.remember_me.data
         try:
             user = User.query.filter_by(username = form.username.data).first()
+            if not check_password_hash(user.password, form.password.data):
+                user = None
             remember_me = form.remember_me.data
         except Exception as e:
             flash(str(e))
@@ -63,10 +62,11 @@ def register():
     form = RegisterForm()
     session['remember_me'] = form.remember_me.data
     if request.method == 'POST' and form.validate():
+        password = generate_password_hash(form.password.data)
         user = User.query.filter_by(username = form.username.data).first()
         if user is None:
             user = User(username=form.username.data, email=form.email.data,
-                    password=form.password.data, firstname=form.firstname.data, lastname=form.lastname.data)
+                    password=password, firstname=form.firstname.data, lastname=form.lastname.data)
             db.session.add(user)
             db.session.commit()
             remember_me = False
@@ -81,3 +81,13 @@ def register():
 @app.before_request
 def before_request():
     g.user = current_user
+
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first()
+    if user == None:
+        flash('User %s not found.' % username)
+        return redirect(url_for('index'))
+    return render_template('user.html', user=user)
+

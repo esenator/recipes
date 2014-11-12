@@ -1,0 +1,23 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+  <head>
+    {% if user %}
+    <title> {{ user.username }}'s recipes </title>
+    {% else %}
+    <title>Error?</title>
+    {% endif %}
+  </head>
+
+  <body>
+  
+    <h1> {{ user.username }} </h1>
+    {% if user.firstname and user.lastname %}
+    <h2> {{ user.firstname }} {{ user.lastname }} </h2>
+    {% else %}
+    <h2> Unnamed Person X </h2>
+    {% endif %}
+    <h2> Personal summary will go here eventually </h2>
+
+  </body>
+</html>

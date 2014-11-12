@@ -6,6 +6,7 @@ class User(db.Model):
     firstname = db.Column(db.String(16))
     lastname = db.Column(db.String(16))
     password = db.Column(db.String(160))
+    bio = db.Column(db.String(500))
     
     def is_authenticated(self):
         return True

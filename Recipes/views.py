@@ -99,3 +99,6 @@ def contact():
 def about():
     return render_template('about.html')
 
+@app.route('/recipes')
+def recipes():
+    return render_template('recipes.html')

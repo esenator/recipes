@@ -18,9 +18,9 @@ class User(db.Model):
 
     def get_id(self):
         try:
-            return unicode(self.id)  # python 2
+            return unicode(self.username)  # python 2
         except NameError:
-            return str(self.id)  # python 3
+            return str(self.username)  # python 3
 
     def __repr__(self):
         return '<User %r>' % (self.username)

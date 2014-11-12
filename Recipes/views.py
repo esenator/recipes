@@ -7,10 +7,9 @@ from Recipes import app, db, lm
 from .forms import LoginForm, RegisterForm
 from .models import User
 
-
-
 @app.route('/')
 @app.route('/index')
+@login_required
 def index(): 
     user = g.user
     return render_template('index.html', user=user, title='Home')
@@ -37,11 +36,15 @@ def login():
         session['remember_me'] = form.remember_me.data
         try:
             user = User.query.filter_by(username = form.username.data).first()
+            remember_me = form.remember_me.data
         except Exception as e:
             flash(str(e))
             return render_template("index.html")
         if user is not None:
-            login_user(user, remember = remember_me)
+            if remember_me is not None:
+                login_user(user, remember = remember_me)
+            else: 
+                login_user(user)
             return redirect(request.args.get("next") or url_for("index"))
         else:
             return render_template("login.html", form=form)
@@ -62,8 +65,8 @@ def register():
     if request.method == 'POST' and form.validate():
         user = User.query.filter_by(username = form.username.data).first()
         if user is None:
-            user = User(form.username.data, form.email.data,
-                    form.password.data, form.firstname.data, form.lastname.data)
+            user = User(username=form.username.data, email=form.email.data,
+                    password=form.password.data, firstname=form.firstname.data, lastname=form.lastname.data)
             db.session.add(user)
             db.session.commit()
             remember_me = False

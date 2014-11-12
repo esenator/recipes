@@ -31,9 +31,9 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         {% if g.user.is_authenticated() %}
-                        <li><button type="button" class="btn btn-default navbar-btn" id="sign-in">Sign in</button></li>
+                        <li><a href= "{{ (url_for('logout')) }}" <button type="button" class="btn btn-default navbar-btn" id="sign-in">Logout</button></a></li>
                         {% else %}
-                        <li><button type="button" class="btn btn-default navbar-btn" id="sign-up">Sign up</button></li>
+                        <li><a href = "{{ (url_for('login')) }}"<button type="button" class="btn btn-default navbar-btn" id="sign-in">Sign-In</button></a></li>
                         {% endif %}
                         
                         <li class="dropdown">

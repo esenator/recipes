@@ -1,7 +1,7 @@
 """
 Routes and views for the flask application.
 """
-from flask import render_template, flash, redirect, session, url_for, request, g
+from flask import render_template, flash, redirect, session, url_for, request, g, jsonify
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from Recipes import app, db, lm
 from .forms import LoginForm, RegisterForm
@@ -91,3 +91,34 @@ def user(username):
         return redirect(url_for('index'))
     return render_template('user.html', user=user)
 
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/recipes')
+def recipes():
+    return render_template('recipes.html')
+
+@app.route('/recipes/<number>')
+def recipefinder(number):
+    number = int(number)
+    if number == 0:
+        return jsonify({'name':"Spaghetti", 'steps':"Put the pasta in the belly."})
+    if number == 1:
+        return jsonify({'name':"Tortellini", 'steps':"Put the pasta in the oven."})
+    if number == 2:
+        return jsonify({'name':"Linguini", 'steps':"Boil water and put pasta in."})
+    if number == 3:
+        return jsonify({'name':"Nachos", 'steps':"Melt cheese over chips."})
+    if number == 4:
+        return jsonify({'name':"Quesadilla", 'steps':"grill cheese in a tortilla."})
+    else:
+        return jsonify({'name':"Potato", 'steps':"Eat it!"})
+
+@app.route('/bio')
+def bio():
+    return render_template('bio.html')

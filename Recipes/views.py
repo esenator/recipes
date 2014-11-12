@@ -102,3 +102,7 @@ def about():
 @app.route('/recipes')
 def recipes():
     return render_template('recipes.html')
+
+@app.route('/bio')
+def bio():
+    return render_template('bio.html')

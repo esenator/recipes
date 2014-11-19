@@ -1,0 +1,17 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Sign In</h1>
+  {% from "_formhelpers.html" import render_field %}
+    <form method="post" action="/login" enctype="multipart/form-data">
+      <dl>
+        {{ render_field(form.username) }}
+        {{ render_field(form.password) }}
+        {{ render_field(form.remember_me)}}
+      </dl>
+      <p><input type=submit value=Login>
+      <a href = "{{ (url_for('register')) }}"<button type="button" class="btn btn-default navbar-btn" id="sign-in">Sign-Up</button></a>
+    </form>
+
+{% endblock %}

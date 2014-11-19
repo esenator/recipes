@@ -20,3 +20,9 @@ class LoginForm(Form):
         validators.Required()
     ])
     remember_me = BooleanField('remember_me', default=False)
+
+class EditProfileForm(Form): 
+    firstname = TextField('First name', [validators.Length(min=0, max = 20)])
+    lastname = TextField('Last name', [validators.Length(min=0, max = 20)])
+    email = TextField('Email', [validators.Length(min = 6, max = 30)])
+    

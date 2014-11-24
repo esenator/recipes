@@ -4,7 +4,7 @@ Routes and views for the flask application.
 from flask import render_template, flash, redirect, session, url_for, request, g, jsonify
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from Recipes import app, db, lm
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, EditProfileForm
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -111,6 +111,43 @@ def about():
 @app.route('/recipes')
 def recipes():
     return render_template('recipes.html')
+
+@app.route("/editprofile", methods=["GET", "POST"])
+def editprofile():
+    if g.user is None and not g.user.is_authenticated():
+        return redirect(url_for('index'))
+    form = EditProfileForm()
+    
+    if form.validate_on_submit():
+        try:
+            first = form.firstname.data
+            last = form.lastname.data
+
+            if first != "": 
+                g.user.firstname = first
+                db.session.commit()
+
+            if last != "": 
+                g.user.lastname = last
+                db.session.commit()
+        
+            email = User.query.filter_by(email = form.email.data).first()
+            if email is None:     
+                if form.email.data != "": 
+                    g.user.email = form.email.data
+            else: 
+                flash('Email already in use, please enter new one')
+
+            print(g.user.email)
+
+            db.session.commit()
+            flash('Thanks for editing your profile!')
+
+            return redirect(request.args.get('next') or url_for('index'))
+        except Exception as e:
+            flash(str(e))
+            return render_template("error.html")
+    return render_template('editprofile.html', form=form)
 
 @app.route('/recipes/<number>')
 def recipefinder(number):

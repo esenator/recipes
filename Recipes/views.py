@@ -138,7 +138,7 @@ def editprofile():
             else: 
                 flash('Email already in use, please enter new one')
 
-            print g.user.email
+            print(g.user.email)
 
             db.session.commit()
             flash('Thanks for editing your profile!')

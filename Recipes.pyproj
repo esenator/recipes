@@ -31,9 +31,6 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Recipes\config.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Recipes\forms.py">
       <SubType>Code</SubType>
     </Compile>
@@ -53,7 +50,6 @@
     <Folder Include="Recipes\templates\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Ana.pubxml" />
     <Content Include="Recipes\templates\about.html" />
     <Content Include="Recipes\templates\base.html" />
     <Content Include="Recipes\templates\bio.html" />
@@ -91,7 +87,6 @@
     <Content Include="Recipes\static\scripts\respond.js" />
     <Content Include="Recipes\static\scripts\respond.min.js" />
     <Content Include="Recipes\static\scripts\_references.js" />
-    <None Include="rpflask.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="wenv\">

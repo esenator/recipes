@@ -17,3 +17,19 @@ c:\users\ryan\documents\visual studio 2013\Projects\Recipes\Recipes\Microsoft.Wi
 c:\users\ryan\documents\visual studio 2013\Projects\Recipes\Recipes\Microsoft.WindowsAzure.Diagnostics.StorageUtility.dll
 c:\users\ryan\documents\visual studio 2013\Projects\Recipes\Recipes\Microsoft.WindowsAzure.Diagnostics.xml
 C:\Users\Ryan\documents\visual studio 2013\Projects\Recipes\Recipes\obj\Debug\Recipes.pyprojResolveAssemblyReference.cache
+C:\Users\Ethan Senator\recipes\obj\Debug\Recipes.pyprojResolveAssemblyReference.cache
+C:\Users\Ethan Senator\recipes\bin\Microsoft.PythonTools.WebRole.dll
+C:\Users\Ethan Senator\recipes\obj\Debug\attach_server.py
+C:\Users\Ethan Senator\recipes\obj\Debug\visualstudio_py_debugger.py
+C:\Users\Ethan Senator\recipes\obj\Debug\visualstudio_py_repl.py
+C:\Users\Ethan Senator\recipes\obj\Debug\visualstudio_py_util.py
+C:\Users\Ethan Senator\recipes\obj\Debug\__init__.py
+C:\Users\Ethan Senator\recipes\obj\Debug\__main__.py
+C:\Users\Ethan Senator\recipes\bin\AzureSetup.cfg
+C:\Users\Ethan Senator\recipes\bin\Microsoft.PythonTools.AzureSetup.exe
+C:\Users\Ethan Senator\recipes\bin\Microsoft.PythonTools.AzureSetup.exe.config
+C:\Users\Ethan Senator\recipes\bin\wfastcgi.py
+C:\Users\Ethan Senator\recipes\obj\Debug\deployment-updated-pyvenv.cfg
+C:\Users\Ethan Senator\recipes\ptvs_virtualenv_proxy.py
+C:\Users\Ethan Senator\recipes\obj\Debug\web.config
+C:\Users\Ethan Senator\recipes\obj\Debug\web.debug.config

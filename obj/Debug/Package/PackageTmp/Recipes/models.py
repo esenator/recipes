@@ -6,6 +6,7 @@ class User(db.Model):
     firstname = db.Column(db.String(16))
     lastname = db.Column(db.String(16))
     password = db.Column(db.String(160))
+    recipes = db.relationship('Recipe', backref='author', lazy='dynamic')
     
     def is_authenticated(self):
         return True
@@ -25,4 +26,21 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % (self.username)
 
+class Recipe(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    name = db.Column(db.String(64), index=True)
+    user_id = db.Column(db.String(16), db.ForeignKey('user.username'))
+    parent = db.Column(db.String(64), index=True)
+    timestamp = db.Column(db.DateTime)
+    
+    def __repr__(self):
+        return '<Recipe %r>' % (self.name)
+    
+class Ingredient(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(40), index=True)
+    is_allergen = db.Column(db.Boolean)
+    
+    def __repr__(self):
+        return '<Ingredient %r>' % (self.name)
     

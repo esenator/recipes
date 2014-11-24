@@ -41,7 +41,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 {% if g.user.is_authenticated() %}
                                 <li><a href="{{ (url_for('user', username = g.user.username)) }}">Go to Profile</a></li>
-                                <li class="disabled"><a href="#prof_edit">Edit Profile</a></li>
+                                <li ><a href="{{ (url_for('editprofile')) }}">Edit Profile</a></li>
                                 <li class="divider"></li>
                                 <li><a href="{{ (url_for('logout')) }}">Logout</a></li>
                                 {% else %}

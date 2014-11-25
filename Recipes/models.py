@@ -40,6 +40,7 @@ class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(40), index=True)
     is_allergen = db.Column(db.Boolean)
+    unit = db.Column(db.String(16), index = True)
     
     def __repr__(self):
         return '<Ingredient %r>' % (self.name)

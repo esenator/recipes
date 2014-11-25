@@ -1,0 +1,59 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+    <div style="text-align:center"
+      <h1>New Recipe <hr></h1>
+      
+      <label for="amount">Amount: </label>
+      <input id="amount">
+      <label for="units">Unit: </label>
+      <input id="units">
+      <label for="ingredient">Ingredient: </label>
+      <input id="ingredient">
+      <button type="button" id="addingred"> Add Ingredient </button> 
+      
+      <div id="recipes" style="text-align:center"> 
+     
+      </div>
+    
+    </div>
+
+    <script>
+    var n = 1; 
+    var amount; 
+    var unit; 
+    var name; 
+    var listOfIngredients;
+
+    $(document).ready(function() {
+      $.ajax({
+        url: '/newrecipe'
+        success: function(list) {
+          
+        }
+        
+      });
+    });     
+
+    function loadRecipe(n, amount, unit, name){
+      $.ajax({
+        success: function(){
+          $("#recipes").append("<p> " + n + ". " + amount + " " + unit + " " + name +  "</p> ");
+        }
+      });
+    }
+    
+
+    $("#addingred").click(function(){
+
+      amount = $("#amount").val();
+      unit = $("#units").val();
+      name = $("#ingredient").val();
+
+      loadRecipe(n, amount, unit, name); 
+      n = n+1; 
+    });
+    </script>
+
+{% endblock %}

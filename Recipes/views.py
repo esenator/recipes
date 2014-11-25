@@ -157,15 +157,10 @@ def delete():
     if form.validate_on_submit(): 
         try: 
             user = User.query.filter_by(username = form.username.data).first()
-            print "woo"
             if user is not None: 
-                print "sllala"
                 if check_password_hash(user.password, form.password.data):
-                    print "hello!"
                     db.session.delete(user)
                     db.session.commit()
-                    print "goodbye!"
-                print "oops"
             return redirect(url_for('index'))
 
         except Exception as e: 
@@ -189,6 +184,15 @@ def recipefinder(number):
         return jsonify({'name':"Quesadilla", 'steps':"grill cheese in a tortilla."})
     else:
         return jsonify({'name':"Potato", 'steps':"Eat it!"})
+
+@app.route('/newrecipe')
+def newRecipe(): 
+    user = g.user
+
+    #ingred = db.session.query(Ingredient.name).all()
+
+
+    return render_template('newrecipe.html')
 
 @app.route('/bio')
 def bio():

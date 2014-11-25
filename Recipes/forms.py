@@ -26,3 +26,7 @@ class EditProfileForm(Form):
     lastname = TextField('Last name', [validators.Length(min=0, max = 20)])
     email = TextField('Email', [validators.Length(min = 6, max = 30)])
     
+class DeleteProfileForm(Form): 
+    username = TextField('Username', [validators.Required()])
+    password = PasswordField('password', [validators.Required()])
+  

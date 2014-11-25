@@ -4,7 +4,7 @@ Routes and views for the flask application.
 from flask import render_template, flash, redirect, session, url_for, request, g, jsonify
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from Recipes import app, db, lm
-from .forms import LoginForm, RegisterForm, EditProfileForm
+from .forms import LoginForm, RegisterForm, EditProfileForm, DeleteProfileForm
 from .models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -41,7 +41,7 @@ def login():
                 user = None
             remember_me = form.remember_me.data
         except Exception as e:
-            flash(str(e))
+            flash(str("Login failed, please try again"))
             return render_template("error.html")
         if user is not None:
             if remember_me is not None:
@@ -147,6 +147,32 @@ def editprofile():
             flash(str(e))
             return render_template("error.html")
     return render_template('editprofile.html', form=form)
+
+@app.route('/delete', methods =["GET", "POST"])
+def delete(): 
+    if g.user is None and not g.user.is_authenticated():
+            return redirect(url_for('index'))
+    form = DeleteProfileForm()
+
+    if form.validate_on_submit(): 
+        try: 
+            user = User.query.filter_by(username = form.username.data).first()
+            print "woo"
+            if user is not None: 
+                print "sllala"
+                if check_password_hash(user.password, form.password.data):
+                    print "hello!"
+                    db.session.delete(user)
+                    db.session.commit()
+                    print "goodbye!"
+                print "oops"
+            return redirect(url_for('index'))
+
+        except Exception as e: 
+            flash(str(e))
+            return render_template("error.html")
+    return render_template('delete.html', form=form)
+
 
 @app.route('/recipes/<number>')
 def recipefinder(number):

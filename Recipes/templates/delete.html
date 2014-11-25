@@ -1,0 +1,15 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Delete Profile</h1>
+    {% from "_formhelpers.html" import render_field %}
+    <form method=post action="delete">
+      <dl>
+        {{ render_field(form.username) }}
+        {{ render_field(form.password) }}
+      </dl>
+      <p><input type=submit value=Delete Profile>
+    </form>
+
+{% endblock %}

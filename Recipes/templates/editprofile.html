@@ -11,6 +11,7 @@
         {{ render_field(form.email) }}
       </dl>
       <p><input type=submit value=Edit Profile>
+      <a href = "{{ (url_for('delete')) }}"<button type="button" class="btn btn-default navbar-btn" id="delete">Delete Account</button></a>
     </form>
 
 {% endblock %}

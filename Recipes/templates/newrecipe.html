@@ -19,6 +19,12 @@
     
     </div>
 
+{% endblock %}
+
+{% block scripts %}
+
+{{ super() }}
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
     <script>
     var n = 1; 
     var amount; 
@@ -28,17 +34,34 @@
 
     $(document).ready(function() {
       $.ajax({
-        url: '/newrecipe'
+        url: '/ingredNames',
         success: function(list) {
-          
+            $( "#ingredient" ).autocomplete({
+              source: list.names
+            });
         }
-        
+      });
+
+      $.ajax({
+        url: '/ingredUnits',
+        success: function(list) {
+            $( "#units" ).autocomplete({
+              source: list.names
+            });
+        }
       });
     });     
+
+    listOfIngredients = []
 
     function loadRecipe(n, amount, unit, name){
       $.ajax({
         success: function(){
+          listOfIngredients.push({
+            "quantity": amount,
+            "unit": unit, 
+            "name": name
+          })
           $("#recipes").append("<p> " + n + ". " + amount + " " + unit + " " + name +  "</p> ");
         }
       });

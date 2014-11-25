@@ -5,7 +5,7 @@ from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from Recipes import app, db, lm
 from .forms import LoginForm, RegisterForm, EditProfileForm, DeleteProfileForm
-from .models import User
+from .models import User, Ingredient, Unit
 from werkzeug.security import generate_password_hash, check_password_hash
 
 @app.route('/dbcreate')
@@ -188,11 +188,25 @@ def recipefinder(number):
 @app.route('/newrecipe')
 def newRecipe(): 
     user = g.user
-
-    #ingred = db.session.query(Ingredient.name).all()
-
-
     return render_template('newrecipe.html')
+
+@app.route('/ingredNames')
+def getIngredName(): 
+    ingred = Ingredient.query.with_entities(Ingredient.name).all()
+    print ingred
+    ingred2 = []
+    for i in ingred:
+        ingred2.append(i[0])
+    return jsonify(names=ingred2)
+
+@app.route('/ingredUnits')
+def getIName(): 
+    ingred = Ingredient.query.with_entities(Unit.unit).all()
+    print ingred
+    ingred2 = []
+    for i in ingred:
+        ingred2.append(i[0])
+    return jsonify(names=ingred2)
 
 @app.route('/bio')
 def bio():

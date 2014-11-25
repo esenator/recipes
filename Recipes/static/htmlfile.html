@@ -1,0 +1,129 @@
+
+<!-- extend from base layout -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recipes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    
+
+<script type=text/javascript>
+    var $SCRIPT_ROOT = "";
+</script>   
+	<div class="navbar navbar-default" role="navigation" id="myTab">
+
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#" data-toggle="tab">Recipes <span class="label label-default">Beta</span></a>
+                </div>
+                
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href= "/login"id="home_tab">Home</a></li>
+                        <li><a href="/about" >About</a></li>
+                        <li><a href="/contact" >Contact</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                                </div>
+                        <button type="submit" class="btn btn-default disabled">Submit</button>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#profile" class="dropdown-toggle" data-toggle="dropdown">Profile<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                
+                                <li><a href="/user/aaaaaa">Go to Profile</a></li>
+                                <li ><a href="/editprofile">Edit Profile</a></li>
+                                <li class="divider"></li>
+                                <li><a href="/logout">Logout</a></li>
+                                
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </div>
+
+    
+    <div style="text-align:center"
+      <h1>New Recipe <hr></h1>
+      
+      <label for="amount">Amount: </label>
+      <input id="amount">
+      <label for="units">Unit: </label>
+      <input id="units">
+      <label for="ingredient">Ingredient: </label>
+      <input id="ingredient">
+      <button type="button" id="addingred"> Add Ingredient </button> 
+      
+      <div id="recipes" style="text-align:center"> 
+     
+      </div>
+    
+    </div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script>
+    var n = 1; 
+    var amount; 
+    var unit; 
+    var name; 
+    var listOfIngredients;
+
+    $(document).ready(function() {
+      $.ajax({
+        url: '/ingredNames',
+        success: function(list) {
+            $( "#ingredient" ).autocomplete({
+              source: list.names
+            });
+        }
+      });
+
+      $.ajax({
+        url: '/ingredUnits',
+        success: function(list) {
+            $( "#units" ).autocomplete({
+              source: list.names
+            });
+        }
+      });
+    });     
+
+    function loadRecipe(n, amount, unit, name){
+      $.ajax({
+        success: function(){
+          $("#recipes").append("<p> " + n + ". " + amount + " " + unit + " " + name +  "</p> ");
+        }
+      });
+    }
+    
+
+    $("#addingred").click(function(){
+
+      amount = $("#amount").val();
+      unit = $("#units").val();
+      name = $("#ingredient").val();
+
+      loadRecipe(n, amount, unit, name); 
+      n = n+1; 
+    });
+    </script>
+  </body>
+</html>

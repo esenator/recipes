@@ -31,6 +31,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="config.py" />
+    <Compile Include="Recipes\config.py" />
     <Compile Include="Recipes\forms.py">
       <SubType>Code</SubType>
     </Compile>
@@ -50,6 +52,7 @@
     <Folder Include="Recipes\templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.db" />
     <Content Include="Recipes\templates\about.html" />
     <Content Include="Recipes\templates\base.html" />
     <Content Include="Recipes\templates\bio.html" />
@@ -57,6 +60,7 @@
     <Content Include="Recipes\templates\error.html" />
     <Content Include="Recipes\templates\index.html" />
     <Content Include="Recipes\templates\login.html" />
+    <Content Include="Recipes\templates\newrecipe.html" />
     <Content Include="Recipes\templates\profile.html" />
     <Content Include="Recipes\templates\recipes.html" />
     <Content Include="Recipes\templates\register.html" />

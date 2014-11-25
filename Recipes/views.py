@@ -134,8 +134,6 @@ def editprofile():
                 if last != "": 
                     g.user.lastname = last
                     db.session.commit()
-            
-                print g.user.email
 
                 db.session.commit()
                 flash('Thanks for editing your profile!')
@@ -193,7 +191,6 @@ def newRecipe():
 @app.route('/ingredNames')
 def getIngredName(): 
     ingred = Ingredient.query.with_entities(Ingredient.name).all()
-    print ingred
     ingred2 = []
     for i in ingred:
         ingred2.append(i[0])
@@ -202,7 +199,6 @@ def getIngredName():
 @app.route('/ingredUnits')
 def getIName(): 
     ingred = Ingredient.query.with_entities(Unit.unit).all()
-    print ingred
     ingred2 = []
     for i in ingred:
         ingred2.append(i[0])

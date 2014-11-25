@@ -120,29 +120,28 @@ def editprofile():
     
     if form.validate_on_submit():
         try:
-            first = form.firstname.data
-            last = form.lastname.data
-
-            if first != "": 
-                g.user.firstname = first
-                db.session.commit()
-
-            if last != "": 
-                g.user.lastname = last
-                db.session.commit()
-        
             email = User.query.filter_by(email = form.email.data).first()
             if email is None:     
                 if form.email.data != "": 
                     g.user.email = form.email.data
+                first = form.firstname.data
+                last = form.lastname.data
+
+                if first != "": 
+                    g.user.firstname = first
+                    db.session.commit()
+
+                if last != "": 
+                    g.user.lastname = last
+                    db.session.commit()
+            
+                print g.user.email
+
+                db.session.commit()
+                flash('Thanks for editing your profile!')
             else: 
                 flash('Email already in use, please enter new one')
-
-            print(g.user.email)
-
-            db.session.commit()
-            flash('Thanks for editing your profile!')
-
+                
             return redirect(request.args.get('next') or url_for('index'))
         except Exception as e:
             flash(str(e))

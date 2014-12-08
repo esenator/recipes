@@ -32,9 +32,8 @@ class Unit(db.Model):
     __tablename__ = 'Unit'
     id = db.Column(db.Integer, primary_key=True)
     unit = db.Column(db.String(16), index=True)
-    ingredients = db.relationship('RecipeToIngredient', backref='unitidorig')
     def __repr__(self):
-        return '<Unit %r>' % (self.name)
+        return '<Unit %r>' % (self.unit)
 
 class Recipe(db.Model):
     __tablename__ = 'Recipe'
@@ -63,6 +62,7 @@ class RecipeToIngredient(db.Model):
     recipeid = db.Column(db.Integer, db.ForeignKey('Recipe.id'), primary_key=True)
     ingredientid = db.Column(db.Integer, db.ForeignKey('Ingredient.id'), primary_key=True)
     unitid = db.Column(db.Integer, db.ForeignKey('Unit.id'))
+    unit = db.relationship("Unit")
     quantity = db.Column(db.String(10))
     ingredient = db.relationship("Ingredient", backref="rectoingred")
 

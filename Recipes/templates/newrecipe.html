@@ -5,6 +5,8 @@
 <link rel="stylesheet" type="text/css" href="static/scripts/bootstrap-wysihtml5-0.0.2.css"></link>
  <div style="text-align:center">
       <h1>New Recipe <hr></h1>
+      <label for="title">Name of recipe: </label>
+      <input id="title"> <hr>
       <label for="amount">Amount: </label>
       <input id="amount">
       <label for="units">Unit: </label>
@@ -47,8 +49,10 @@
     var name; 
     var listOfIngredients;
     var steps; 
+    var title; 
 
     $(document).ready(function() {
+      $("#addrecipe").attr('disabled', 'disabled');
       $('#some-textarea').wysihtml5({
         "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
         "emphasis": true, //Italics, bold, etc. Default true
@@ -81,11 +85,6 @@
 
     listOfIngredients = []
 
-    $("#addsteps").click(function(){
-      steps = $('#some-textarea').val();
-      $("#steps").html(steps);
-    });
-
     function loadRecipe(n, amount, unit, name){
       $.ajax({
         success: function(){
@@ -98,6 +97,25 @@
         }
       });
     }
+
+    $("#addrecipe").click(function() {
+      title = $("#title").val(); 
+      var jsob = {"title": title, "ingredients": listOfIngredients, "steps": steps};
+      console.log(jsob)
+      $.ajax({
+        url: '/newrecipe',
+        type: "POST",
+        data: JSON.stringify(jsob, null, '\t'),
+        contentType: 'application/json',
+        dataType: "JSON"
+      });
+    });
+
+    $("#addsteps").click(function(){
+      steps = $('#some-textarea').val();
+      $("#steps").html(steps);
+      $("#addrecipe").removeAttr('disabled');
+    });
 
     $("#addingred").click(function(){
       amount = $("#amount").val();

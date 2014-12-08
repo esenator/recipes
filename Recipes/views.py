@@ -174,8 +174,7 @@ def recipefinder(number):
     if recipe == None:
         flash('Recipe %s not found.' % number)
         return redirect(url_for('index'))
-    return render_template('recipe.html', recipe=recipe)
-    
+    return render_template('recipes.html', recipe=recipe)
 
 @app.route('/newrecipe', methods=["GET", "POST"])
 def newRecipe(): 

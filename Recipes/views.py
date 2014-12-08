@@ -20,10 +20,6 @@ def index():
     user = g.user
     return render_template('index.html', user=user, title='Home')
 
-@app.route('/temp')
-def temp(): 
-	return render_template('temp.html')
-
 @lm.user_loader
 def load_user(id):
     return User.query.get(id)
@@ -105,6 +101,10 @@ def user(username):
 def contact():
     return render_template('contact.html')
 
+@app.route('/search')
+def search():
+    return render_template('search.html')
+
 @app.route('/about')
 def about():
     return render_template('about.html')
@@ -167,6 +167,25 @@ def delete():
             return render_template("error.html")
     return render_template('delete.html', form=form)
 
+@app.route('/getrecipesfromingredients', methods = ["GET", "POST"])
+def getRecFromIng():
+    if request.method == "POST":
+        print(request.json['ingredient'])
+        iid = Ingredient.query.filter_by(name = request.json['ingredient']).first()
+        rec = RecipeToIngredient.query.filter_by(ingredientid=iid.id).all()
+        recipes = []
+        recipes2 = []
+        for r in rec: 
+            recipes.append(r.recipeid)
+        print(recipes)
+        for r in recipes: 
+            r2 = Recipe.query.filter_by(id = r).first()
+            recipes2.append(r2.name)
+        print(recipes2)
+        return jsonify(recipes=recipes2)
+    return render_template('search.html')
+
+
 
 @app.route('/recipes/<number>')
 def recipefinder(number):
@@ -211,6 +230,14 @@ def getIngredName():
     for i in ingred:
         ingred2.append(i[0])
     return jsonify(names=ingred2)
+
+@app.route('/recipenames')
+def getRecipeNames(): 
+    recipe = Recipe.query.with_entities(Recipe.name).all()
+    recipe2 = []
+    for i in recipe:
+        recipe2.append(i[0])
+    return jsonify(names=recipe2)
 
 @app.route('/ingredUnits')
 def getIName(): 

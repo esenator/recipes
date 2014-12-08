@@ -170,9 +170,9 @@ def delete():
 
 @app.route('/recipes/<number>')
 def recipefinder(number):
-    recipe= Reipe.query.filter_by(recipeid=number).first()
+    recipe= Recipe.query.filter_by(id=number).first()
     if recipe == None:
-        flash('Recipe %s not found.' % recipeid)
+        flash('Recipe %s not found.' % number)
         return redirect(url_for('index'))
     return render_template('recipe.html', recipe=recipe)
     

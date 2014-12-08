@@ -31,7 +31,7 @@
       <h3> Procedure </h3>
       <div id="steps" style="text-align:center; width:200px; margin-left:auto; margin-right:auto;">
       </div>
-      <button type="button" id="addrecipe"> Add Recipe </button>
+      <a href="{{ (url_for('user', username = g.user.username)) }}" role="button" id="addrecipe"> Add Recipe </button>
     </div>
 {% endblock %}
 

@@ -6,12 +6,9 @@ class RegisterForm(Form):
     username = TextField('Username', [validators.Length(min=6, max=16)])
     email = TextField('Email Address', [validators.Length(min=6, max=64)])
     password = PasswordField('Password', [
-        validators.Required(),
-        validators.EqualTo('confirm', message='Passwords must match')
-    ])
-    confirm = PasswordField('Repeat Password')
+        validators.Required()])
     firstname = TextField('First name')
-    lastname = TextField('Last tname')
+    lastname = TextField('Last name')
     remember_me = BooleanField('remember_me', default=False)
     
 class LoginForm(Form):

@@ -114,6 +114,7 @@ def recipes():
     return render_template('recipes.html')
 
 @app.route("/editprofile", methods=["GET", "POST"])
+@login_required
 def editprofile():
     if g.user is None and not g.user.is_authenticated():
         return redirect(url_for('index'))
@@ -148,6 +149,7 @@ def editprofile():
     return render_template('editprofile.html', form=form)
 
 @app.route('/delete', methods =["GET", "POST"])
+@login_required
 def delete(): 
     if g.user is None and not g.user.is_authenticated():
             return redirect(url_for('index'))

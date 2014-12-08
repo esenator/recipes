@@ -5,16 +5,23 @@
     {% if user %}
     <title> {{ user.username }}'s recipes </title>
     {% else %}
-    <title>Error?</title>
+    <title>User not found</title>
     {% endif %}
   </head>
 
   <body>
-  
-    <h1> {{ g.user.username }} </h1>
-    <h2> {{ g.user.firstname }} {{ g.user.lastname }} </h2>
-    <h2> {{ user.email }} </h2>
-    <h2> Personal summary will go here eventually </h2>
-
+      <div class="jumbotron">
+        <h1> {{ user.username }} </h1>
+        <h2> {{ user.firstname }} {{ user.lastname }} </h2>
+        <h2> {{ user.email }} </h2>
+        <h2> {{user.bio}} </h2>
+      </div>
+      
+      <div>
+          Recipes:
+          {% for recip in user.recipe %}
+          <li><a href="{{(url_for('recipes/{{recip.id}}'))}}">{{recip.name}}</a></li>
+      </div>
   </body>
 </html>
+{% endblock %}

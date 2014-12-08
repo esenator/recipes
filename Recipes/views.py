@@ -5,8 +5,9 @@ from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from Recipes import app, db, lm
 from .forms import LoginForm, RegisterForm, EditProfileForm, DeleteProfileForm
-from .models import User, Ingredient, Unit
+from .models import User, Ingredient, Unit, Recipe, RecipeToIngredient
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 @app.route('/dbcreate')
 def createdb():
@@ -176,9 +177,32 @@ def recipefinder(number):
     return render_template('recipe.html', recipe=recipe)
     
 
-@app.route('/newrecipe')
+@app.route('/newrecipe', methods=["GET", "POST"])
 def newRecipe(): 
     user = g.user
+    data = request.data
+    if request.method == "POST":
+        now = datetime.now()
+        r = Recipe(name=request.json['title'], author=g.user.username, parent="none", timestamp=now, steps=request.json['steps'])
+        db.session.add(r)
+        db.session.commit()
+        idnum = Recipe.query.filter_by(author = g.user.username, parent="none", name=request.json['title'], steps=request.json['steps']).first()
+        idnum = idnum.id
+
+        for i in request.json['ingredients']: 
+            print(i['unit'])
+            u = Unit.query.filter_by(unit=i['unit']).first()
+            unitnum=u.id
+            ingredid = Ingredient.query.filter_by(name=i['name']).first()
+            if ingredid == None:
+                i = Ingredient(name=i['name'], is_allergen = 0)
+                db.session.add(i)
+                db.session.commit()
+                ingredid = Ingredient.query.filter_by(name=i['name']).first()
+            ingredid = ingredid.id
+            rti = RecipeToIngredient(recipeid=idnum, ingredientid = ingredid, unitid=unitnum, quantity= i['quantity'])
+            db.session.add(rti)
+            db.session.commit()
     return render_template('newrecipe.html')
 
 @app.route('/ingredNames')

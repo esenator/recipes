@@ -1,24 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="jumbotron">
-    <div class="containter">
-        <h1>Recipes</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel aliquet justo. Praesent consequat vulputate eros sed vehicula. Fusce magna sapien, placerat eget ultrices et, congue in lacus. Praesent dictum purus vel libero malesuada, tincidunt interdum magna lobortis. Sed sodales ipsum in commodo consectetur. Integer sed tortor tortor. Vivamus ornare nulla mi. Nullam eget sapien facilisis, pretium erat at, molestie ipsum. Donec gravida sapien vitae elementum maximus. In varius gravida tincidunt.</p>
-
-
-        <p>Vivamus a augue tincidunt, posuere nisi ut, sollicitudin nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent aliquam lacinia mattis. Donec finibus hendrerit tincidunt. Donec leo metus, vehicula vel velit vehicula, consequat scelerisque ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce nunc odio, molestie nec consequat a, imperdiet eu enim. Ut sed tortor id dui volutpat varius. Donec vitae risus non diam vehicula gravida et in libero. Morbi hendrerit ante quam. Quisque interdum diam quis enim varius, ac viverra tortor cursus. Nullam malesuada vehicula sodales.
-        </p>
-
-        <p>Nunc a quam pretium, euismod magna id, malesuada erat. In sed vulputate erat. Nunc commodo, risus eu condimentum pellentesque, orci orci fringilla nunc, efficitur semper ex libero aliquet ipsum. Donec at tincidunt ligula. Duis pulvinar, lorem vel congue rhoncus, ipsum nibh viverra lacus, vitae congue tellus neque nec diam. Fusce imperdiet molestie interdum. Sed et metus rutrum, rhoncus lectus vitae, varius neque. Integer sit amet erat vehicula, auctor erat et, interdum risus. Nullam tempus id urna ac feugiat. Cras scelerisque vestibulum risus ut posuere.
-        </p>
-
-        <p>Mauris ultricies, lacus at elementum faucibus, quam ex mattis dolor, et rutrum mauris eros vitae lacus. Suspendisse eu mi in tellus porttitor malesuada non ac tellus. Ut facilisis, est vel posuere vulputate, odio quam imperdiet dui, sed venenatis leo tellus a purus. Pellentesque nec ligula blandit nulla aliquet blandit id ut nulla. Mauris viverra, mi et fermentum aliquet, orci lectus fringilla leo, sed facilisis urna ante nec tellus. Donec mi enim, scelerisque ut libero eget, tincidunt hendrerit massa. Suspendisse non est vel odio cursus venenatis quis vitae velit.
-        </p>
-
-        <p>In ac ultrices nibh. Mauris lacinia justo nec blandit malesuada. Etiam porttitor pellentesque augue, eget maximus leo gravida at. In quis hendrerit enim. Nunc bibendum nibh augue. Suspendisse mollis odio a fermentum vehicula. Curabitur a mi dignissim, aliquet tortor eu, tempor tellus. Nulla ultricies pharetra sem at faucibus. Integer sit amet ante ac ipsum sollicitudin porttitor.
-        </p>
-
-    </div>
+<head>
+    <title>{{recipe.recipeid}}</title>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1>{recipe.name}</h1>
+        <div class="container">
+            <p>This recipe was created by {recipe.author}</p>
+            <p>{recipe.steps}</p>
+        </div>
 </div>
+</body>
+
 {% endblock %}

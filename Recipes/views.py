@@ -169,19 +169,12 @@ def delete():
 
 @app.route('/recipes/<number>')
 def recipefinder(number):
-    number = int(number)
-    if number == 0:
-        return jsonify({'name':"Spaghetti", 'steps':"Put the pasta in the belly."})
-    if number == 1:
-        return jsonify({'name':"Tortellini", 'steps':"Put the pasta in the oven."})
-    if number == 2:
-        return jsonify({'name':"Linguini", 'steps':"Boil water and put pasta in."})
-    if number == 3:
-        return jsonify({'name':"Nachos", 'steps':"Melt cheese over chips."})
-    if number == 4:
-        return jsonify({'name':"Quesadilla", 'steps':"grill cheese in a tortilla."})
-    else:
-        return jsonify({'name':"Potato", 'steps':"Eat it!"})
+    recipe= Reipe.query.filter_by(recipeid=number).first()
+    if recipe == None:
+        flash('Recipe %s not found.' % recipeid)
+        return redirect(url_for('index'))
+    return render_template('recipe.html', recipe=recipe)
+    
 
 @app.route('/newrecipe')
 def newRecipe(): 

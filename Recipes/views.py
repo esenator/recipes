@@ -177,12 +177,11 @@ def getRecFromIng():
         recipes2 = []
         for r in rec: 
             recipes.append(r.recipeid)
-        print(recipes)
         for r in recipes: 
             r2 = Recipe.query.filter_by(id = r).first()
-            recipes2.append(r2.name)
+            recipes2.append({"id": r, "name": r2.name})
         print(recipes2)
-        return jsonify(recipes=recipes2)
+        return jsonify(recipes2=recipes2)
     return render_template('search.html')
 
 

@@ -25,6 +25,7 @@ class EditProfileForm(Form):
     firstname = TextField('First name', [validators.Length(min=0, max = 20)])
     lastname = TextField('Last name', [validators.Length(min=0, max = 20)])
     email = TextField('Email')
+    bio = TextField('Bio')
     
 class DeleteProfileForm(Form): 
     username = TextField('Username', [validators.Required()])

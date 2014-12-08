@@ -1,19 +1,28 @@
-<!-- extend from base layout -->
 {% extends "base.html" %}
-
 {% block content %}
+<html>
+  <head>
     {% if user %}
     <title> {{ user.username }}'s recipes </title>
     {% else %}
-    <title>Error?</title>
+    <title>User not found</title>
     {% endif %}
-  
-    <h1> {{ user.username }} </h1>
-    {% if user.firstname and user.lastname %}
-    <h2> {{ user.firstname }} {{ user.lastname }} </h2>
-    {% else %}
-    <h2> Unnamed Person X </h2>
-    {% endif %}
-    <h2> Personal summary will go here eventually </h2>
+  </head>
 
+  <body>
+      <div class="jumbotron">
+        <h1> {{ user.username }} </h1>
+        <h2> {{ user.firstname }} {{ user.lastname }} </h2>
+        <h2> {{ user.email }} </h2>
+        <h2> {{user.bio}} </h2>
+      </div>
+      
+      <div>
+          Recipes:
+          {% for recip in user.recipes %}
+          <li><a href="{{(url_for('recipefinder', number=recip.id))}}">{{recip.name}}</a></li>
+          {% endfor %}
+      </div>
+  </body>
+</html>
 {% endblock %}

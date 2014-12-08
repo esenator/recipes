@@ -168,7 +168,7 @@ def delete():
     return render_template('delete.html', form=form)
 
 
-@app.route('/recipes/<number>')
+@app.route('/recipes/<number>', methods=["GET"])
 def recipefinder(number):
     recipe= Recipe.query.filter_by(id=number).first()
     if recipe == None:

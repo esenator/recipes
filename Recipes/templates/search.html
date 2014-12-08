@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+    <h1>Search for Recipes</h1>
+    <p class="lead">Enter an ingredient and all recipes with that ingredient will be listed.</p>
+    <label for="search">Search for: </label>
+    <input id="search">
+    <button type="button" id="submit"> Search </button> 
+
+    <div class="fillme"> 
+    	<p>Note: if you enter an ingredient that is not in any recipes, you will receive no results :(</p>
+    </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+{{ super() }}
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script>
+    $(document).ready(function() {
+      $.ajax({
+        url: '/ingredNames',
+        success: function(list) {
+            $( "#search" ).autocomplete({
+              source: list.names
+            });
+        }
+      });
+    });  
+
+    $("#submit").click(function() {
+    	jsob = {"ingredient": $("#search").val()}
+    	console.log(jsob)
+    	$.ajax({
+	        url: '/getrecipesfromingredients',
+	      	type: "POST",
+	        data: JSON.stringify(jsob, null, '\t'),
+	        contentType: 'application/json',
+	        dataType: "JSON"
+	        
+      	});
+    })   
+</script>
+{% endblock %}

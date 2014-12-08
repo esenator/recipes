@@ -2,9 +2,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div style="text-align:center"
+<link rel="stylesheet" type="text/css" href="static/scripts/bootstrap-wysihtml5-0.0.2.css"></link>
+ <div style="text-align:center">
       <h1>New Recipe <hr></h1>
-      
       <label for="amount">Amount: </label>
       <input id="amount">
       <label for="units">Unit: </label>
@@ -12,27 +12,54 @@
       <label for="ingredient">Ingredient: </label>
       <input id="ingredient">
       <button type="button" id="addingred"> Add Ingredient </button> 
-      
-      <div id="recipes" style="text-align:center"> 
-     
-      </div>
-    
+
     </div>
 
+    <div style="text-align:center">
+    <hr>
+    <textarea id="some-textarea" placeholder="Enter text ..." rows="4" cols="150"></textarea>
+    <br>
+    <button type="button" id="addsteps"> Add Steps Below </button>
+      <hr>
+
+      <div id="recipes" style="width:200px; margin-left:auto; margin-right:auto;">
+      <h3> Ingredients </h3>
+      </div>
+
+      <h3> Procedure </h3>
+      <div id="steps" style="text-align:center; width:200px; margin-left:auto; margin-right:auto;">
+      </div>
+      <button type="button" id="addrecipe"> Add Recipe </button>
+    </div>
 {% endblock %}
 
 {% block scripts %}
 
 {{ super() }}
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-    <script>
+<script src="static/scripts/libs/js/wysihtml5-0.3.0_rc2.js"></script>
+<script src="static/scripts/bootstrap-wysihtml5-0.0.2.js"></script>
+<script>
+
     var n = 1; 
     var amount; 
     var unit; 
     var name; 
     var listOfIngredients;
+    var steps; 
 
     $(document).ready(function() {
+      $('#some-textarea').wysihtml5({
+        "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
+        "emphasis": true, //Italics, bold, etc. Default true
+        "lists": true, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
+        "html": false, //Button which allows you to edit the generated HTML. Default false
+        "link": false, //Button to insert a link. Default true
+        "image": false, //Button to insert an image. Default true,
+        "color": false //Button to change color of font  
+      });
+
+
       $.ajax({
         url: '/ingredNames',
         success: function(list) {
@@ -54,6 +81,11 @@
 
     listOfIngredients = []
 
+    $("#addsteps").click(function(){
+      steps = $('#some-textarea').val();
+      $("#steps").html(steps);
+    });
+
     function loadRecipe(n, amount, unit, name){
       $.ajax({
         success: function(){
@@ -62,20 +94,19 @@
             "unit": unit, 
             "name": name
           })
-          $("#recipes").append("<p> " + n + ". " + amount + " " + unit + " " + name +  "</p> ");
+          $("#recipes").append("<h4> " + n + ". " + amount + " " + unit + " " + name +  "</h4> ");
         }
       });
     }
-    
 
     $("#addingred").click(function(){
-
       amount = $("#amount").val();
       unit = $("#units").val();
       name = $("#ingredient").val();
-
-      loadRecipe(n, amount, unit, name); 
-      n = n+1; 
+      if(amount != '' && unit != '' && name != '') {
+        loadRecipe(n, amount, unit, name); 
+        n = n+1; 
+      }
     });
     </script>
 

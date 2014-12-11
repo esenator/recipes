@@ -209,6 +209,8 @@ def newRecipe():
 
         for i in request.json['ingredients']: 
             u = Unit.query.filter_by(unit=i['unit']).first()
+            if u is None: 
+                u = Unit()
             unitnum=u.id
             ingredid = Ingredient.query.filter_by(name=i['name']).first()
             if ingredid is None:

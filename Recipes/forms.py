@@ -3,8 +3,8 @@ from wtforms import BooleanField, TextField, PasswordField, validators
 from wtforms.validators import DataRequired
 
 class RegisterForm(Form):
-    username = TextField('Username', [validators.Length(min=6, max=16)])
-    email = TextField('Email Address', [validators.Length(min=6, max=64)])
+    username = TextField('Username')
+    email = TextField('Email Address')
     password = PasswordField('Password', [
         validators.Required()])
     firstname = TextField('First name')

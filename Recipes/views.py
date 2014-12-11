@@ -109,10 +109,6 @@ def search():
 def about():
     return render_template('about.html')
 
-@app.route('/recipes')
-def recipes():
-    return render_template('recipes.html')
-
 @app.route("/editprofile", methods=["GET", "POST"])
 @login_required
 def editprofile():
@@ -186,6 +182,11 @@ def getRecFromIng():
         print(recipes2)
         return jsonify(recipes2=recipes2)
     return render_template('search.html')
+
+@app.route('/recipes', methods=["GET"])
+def recipelist():
+    listofrecipes=Recipe.query.all()
+    return render_template('recipeoverview.html', listofrecipes=listofrecipes)
 
 @app.route('/recipes/<number>', methods=["GET"])
 def recipefinder(number):

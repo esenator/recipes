@@ -11,16 +11,21 @@
 
   <body>
       <div class="jumbotron">
-        <h1> {{ user.username }} </h1>
-        <h2> {{ user.firstname }} {{ user.lastname }} </h2>
-        <h2> {{ user.email }} </h2>
+      <div style="clear: both">
+        <h1 style="float: left"> Username: </h1>
+        <h1 style="float: left; font-weight: 200;"> {{ user.username }} </h1>
       </div>
+        <h1> . </h1>
+        <h2> Name: {{ user.firstname }} {{ user.lastname }} </h2>
+        <h2> Email: {{ user.email }} </h2>
       
-      <div>
+      
+      
           Recipes:
           {% for recip in user.recipes %}
           <li><a href="{{(url_for('recipefinder', number=recip.id))}}">{{recip.name}}</a></li>
           {% endfor %}
+      </div>
       </div>
   </body>
 </html>

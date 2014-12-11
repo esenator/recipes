@@ -11,6 +11,7 @@
 
     <div id="fillme"> 
     	<p>Note: if you enter an ingredient that is not in any recipes, you will receive no results :(</p>
+    	
     </div>
     </div>
 </div>
@@ -27,7 +28,10 @@
         success: function(list) {
             $( "#search" ).autocomplete({
               source: list.names
+
             });
+            for(i = 0; i<list.length; i++)
+              	console.log(list.names)
         }
       });
     });  
@@ -46,14 +50,23 @@
 	        success: function(data){
 	        	for(i = 0; i<data.recipes2.length; i++){
 	        		ah = data.recipes2[i].name;
-	        		st = st.concat("\<li\>\<a href \"\{\{(url_for('recipefinder', number=");
-	        		st = st.concat(data.recipes2[i].id.toString()); 
-	        		st = st.concat("))\}\}\"\>");
-	        		st = st.concat(ah)
-	        		st = st.concat("\</a\>\</li\>")
-	        		console.log(st)
-	        		$("#fillme").append(st);
-	        }}
+	        		ba = data.recipes2[i].url; 
+	        	    st = st.concat("\<li\>\<a href=\"");
+	        	    st = st.concat(ba)
+	        	    st = st.concat("\"\>")
+	        	    st = st.concat(ah)
+
+	        		// st = st.concat(data.recipes2[i].id.toString()); 
+	        		// st = st.concat("))\}\}\"\>");
+	        		// st = st.concat(ah)
+	        		st = st.concat("\</a\>\</li\>\n")
+
+	        		console.log(st)	
+	        	}
+	        	//document.getElementById('fillme').appendChild(st);
+	        	$("#fillme").html(st); 
+	    }
+
       	});
     })   
 </script>

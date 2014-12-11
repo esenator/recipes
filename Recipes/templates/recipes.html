@@ -13,6 +13,7 @@
             {% for ingred in recipe.children %}
             	<p style="padding-left: 2em;">{{ingred.quantity}} {{ ingred.unit.unit }} {{ ingred.ingredient.name }}</p>
             {% endfor %}
+            <p> Steps: </p>
             <div>{{recipe.steps|safe}}</div>
         </div>
 </div>

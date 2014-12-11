@@ -181,12 +181,11 @@ def getRecFromIng():
             recipes.append(r.recipeid)
         for r in recipes: 
             r2 = Recipe.query.filter_by(id = r).first()
-            recipes2.append({"id": r, "name": r2.name})
+            recipes2.append({"url": url_for('recipefinder', number = r), "name": r2.name})
+            #recipes2.append({"id": r, "name": r2.name})
         print(recipes2)
         return jsonify(recipes2=recipes2)
     return render_template('search.html')
-
-
 
 @app.route('/recipes/<number>', methods=["GET"])
 def recipefinder(number):
@@ -209,11 +208,10 @@ def newRecipe():
         idnum = idnum.id
 
         for i in request.json['ingredients']: 
-            print(i['unit'])
             u = Unit.query.filter_by(unit=i['unit']).first()
             unitnum=u.id
             ingredid = Ingredient.query.filter_by(name=i['name']).first()
-            if ingredid == None:
+            if ingredid is None:
                 i = Ingredient(name=i['name'], is_allergen = 0)
                 db.session.add(i)
                 db.session.commit()

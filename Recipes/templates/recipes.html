@@ -17,12 +17,12 @@
             <div>{{recipe.steps|safe}}</div>
         </div>
         {% if recipe.id != 1 %}
-        <a href="{{ (url_for('recipefinder', number=recipe.id-1)) }}" class="btn btn-primary" role="button">
+        <a href="{{ (url_for('recipefinder', number=recipe.id-1)) }}" class="btn btn-default pull-left" role="button">
   <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span> Previous
         </a>
         {% endif %}
-        <a href="{{ (url_for('recipefinder', number=recipe.id+1)) }}" class="btn btn-primary" role="button">
-  <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span> Next
+        <a href="{{ (url_for('recipefinder', number=recipe.id+1)) }}" class="btn btn-default pull-right" role="button"> Next
+  <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
         </a>
     </div>
 </body>

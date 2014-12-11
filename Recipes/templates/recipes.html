@@ -11,7 +11,11 @@
             <p>This recipe was created by <a href="{{(url_for('user', username=recipe.author))}}"> {{recipe.author}}</a></p>
             <p> Ingredients:</p>
             {% for ingred in recipe.children %}
-            	<p style="padding-left: 2em;">{{ingred.quantity}} {{ ingred.unit.unit }} {{ ingred.ingredient.name }}</p>
+            	{% if ingred.unit.unit != "unit" %}
+            		<p style="padding-left: 2em;">{{ingred.quantity}} {{ ingred.unit.unit }} {{ ingred.ingredient.name }}</p>
+            	{% else %}
+            		<p style="padding-left: 2em;">{{ingred.quantity}} {{ ingred.ingredient.name }}</p>
+            	{% endif %}
             {% endfor %}
             <p> Steps: </p>
             <div>{{recipe.steps|safe}}</div>

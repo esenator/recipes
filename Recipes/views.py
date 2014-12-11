@@ -78,10 +78,10 @@ def register():
                     session.pop('remember_me', None)
                 login_user(user, remember = remember_me)
                 flash('Thanks for registering')
-            return redirect(request.args.get('next') or url_for('index'))
+            return redirect(request.args.get('next') or url_for('register'))
         except Exception as e:
             flash(str(e))
-            return render_template("error.html")
+            return render_template("register.html")
     return render_template('register.html', form=form)
 
 @app.before_request
@@ -211,7 +211,9 @@ def newRecipe():
         for i in request.json['ingredients']: 
             u = Unit.query.filter_by(unit=i['unit']).first()
             if u is None: 
-                u = Unit()
+                u = Unit(unit=i['unit'])
+                db.session.add(u)
+                db.session.commit() 
             unitnum=u.id
             ingredid = Ingredient.query.filter_by(name=i['name']).first()
             if ingredid is None:

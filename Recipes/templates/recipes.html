@@ -8,7 +8,7 @@
     <div class="jumbotron">
         <h1>{{recipe.name}}</h1>
         <div class="container">
-            <p>This recipe was created by {{recipe.author}}</p>
+            <p>This recipe was created by <a href="{{(url_for('user', username=recipe.author))}}"> {{recipe.author}}</a></p>
             <p> Ingredients:</p>
             {% for ingred in recipe.children %}
             	<p style="padding-left: 2em;">{{ingred.quantity}} {{ ingred.unit.unit }} {{ ingred.ingredient.name }}</p>

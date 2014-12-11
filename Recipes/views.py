@@ -215,8 +215,8 @@ def newRecipe():
             unitnum=u.id
             ingredid = Ingredient.query.filter_by(name=i['name']).first()
             if ingredid is None:
-                i = Ingredient(name=i['name'], is_allergen = 0)
-                db.session.add(i)
+                potato = Ingredient(name=i['name'], is_allergen = 0)
+                db.session.add(potato)
                 db.session.commit()
                 ingredid = Ingredient.query.filter_by(name=i['name']).first()
             ingredid = ingredid.id

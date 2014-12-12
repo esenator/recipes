@@ -1,60 +1,11 @@
 recipes
 =======
 
-Cooking app
-
 Ethan Senator and Ana Bealo
 
-  1. Parse cookbook from inter webs
-  2. Pages
-  	1. User accounts
-      1. Login options
-      2. Email / password
-      3. Facebook
-      4. Twitter
-      5. Google
-      6. Instagram
-    2. Profiles
-      1. Username
-      2. Change password
-      3. Profile pic
-      4. Follow other users
-      5. Saved recipes
-      6. User history
-      7. Vote on other users
-      8. Top users
-      9. Locations
-      10. Allergies (hide from search results)
-      11. Levels
-  	3. Recipe pages
-    	1. Can be forked (copied and edited / substitutions)
-    	2. Nutrition info
-    	3. Voting process
-      	4. Good recipe
-      	5. Bad recipe
-    	6. Spoon users if you like their recipes/them ;)
-    	7. Users upload pictures
-      		1. Users vote on best picture
-    	8. Allergy info
-    	9. Level (difficulty)
-  		10. College mode
-    		1. Substitutions
-    		2. Budget
-  	4. Explore
-    	1. By Ingredient
-    	2. Stove / microwaves
-    	3. Categories
-      		1. Vegetarian
-      		2. Vegan
-      		3. etc…
-      		4. Salty / sweet
-    	4. Time
-      		1. Prep / total
-    	5. Difficulty
-    	6. By users
-	5. Home pages
-		1. Recipe of the day
-		2. Categories with top recipe picture
-  3. UI
-    1. [Bootstrap](http://getbootstrap.com/)
-    2. [Flat](http://designmodo.github.io/Flat-UI/)
+Recipes is a social cooking app where users post recipes online. Other users can then view these recipes and if they like them, can cick on the poster's profile from the recipe page to view other recipes that that poster has made. Eventually, users will be able to "fork" recipes, which will allow them to create variations by autopopulating a new recipe with the information from its parent which can then be customized, all while keeping a record of that parent chain so that viewers can follow a recipe back to its original. This functionality is in our database, however, we have not yet built a way to edit completed recipes, so we haven't activated the forking functionality yet. We also plan on letting users follow other users, again this functionality exists in the database but has not yet been implemented.
+<br>
+<h4>Sight overview</h4>
+New users can create an account via the sign up page, the only required fields are username and password, which we hash and salt before adding to our database. After logging in, the user is redirected to the index page which currently shows their username and the make new recipe button. Users can navigate the site with the navbar, which has all the relevant links including the profile view. When making a new recipe, if the unit or ingredient the user uses is not in our database, we use ajax to add it to the database so that future recipes can be made more efficiently. Recipes autocomplete units and ingredients from the database. Users can add steps to the database using our inline rich text editor, formatting it however they like. If a user wishes to browse through recipes they can go to the browse tab to view an overview of all the recipes, or use our search tab, which currently searches for all recipes that contain a given ingredient. Currently, any error that occurs brings the user to our error page, which shows a log of all errors as flashed messages.
+<br>
+Most of our source code is in the Recipes subfolder, the only ones outside that are our generated files for running the project on Azure, the database control python files, and our configuration and run python files. 
